@@ -5,7 +5,7 @@ const initBoard = ["", "", "", "", "", "", "", "", ""];
 
 function Board() {
   const [board, setBoard] = useState(initBoard);
-  const [xTurn, setXTurn] = useState(true);
+  const [aTurn, setATurn] = useState(true);
   const [winner, setWinner] = useState(null);
 
   const checkWin = (currentBoard) => {
@@ -39,14 +39,14 @@ function Board() {
     }
   
     let boardClone = [...board];
-    boardClone[index] = xTurn ? "X" : "0"; 
+    boardClone[index] = aTurn ? "T" : "A"; 
 
     setBoard(boardClone);
     if(checkWin(boardClone)){
-      let winner = xTurn ? "X":"O"
+      let winner = aTurn ? "T":"A"
       setWinner(winner)
     } else{
-      setXTurn(!xTurn);
+      setATurn(!aTurn);
     }
   };
   const renderBoard = () => {
@@ -62,17 +62,22 @@ function Board() {
   const reset = () => {
     setBoard(initBoard);
     setWinner(null);
-    setXTurn(!xTurn);
+    setATurn(!aTurn);
   };
   return (
     <div className="App">
 
       <h1>Tic Tac Toe</h1>
       {winner && <h1>{winner} Party</h1>}
-      <button onClick={reset}>reset</button>
       <div className="game-board">{renderBoard()}</div>
+      <h3><button onClick={reset}>reset</button></h3>
+      
     </div>
+    
   );
+ 
+  
+  
 }
 
 export default Board;
